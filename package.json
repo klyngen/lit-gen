@@ -1,0 +1,19 @@
+{
+  "name": "lit-generator",
+  "type":"module",
+  "version": "2.0.0",
+  "description": "Make components with styles really fast. Almost like the angular cli. Just bad",
+  "main": "index.js",
+  "author": "Martin Klingenberg",
+  "license": "MIT",
+  "scripts": {
+    "exec": "node index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "commander": "^9.2.0"
+  },
+  "bin": {
+    "lit-gen": "./index.js"
+  }
+}
