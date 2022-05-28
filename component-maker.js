@@ -12,7 +12,6 @@ export function createComponent(name, test) {
 
   const componentName = pathSegments[pathSegments.length - 1];
 
-  const componentFile = createComponentFile(componentName);
 
   let path = "";
   if (pathSegments.length > 1) {
@@ -20,6 +19,8 @@ export function createComponent(name, test) {
   }
 
   const names = createComponentName(componentName);
+  const componentFile = createComponentFile(names);
+
 
   path = join(path, names.pascal);
 

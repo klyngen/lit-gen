@@ -67,7 +67,7 @@ export const ${names.pascal} = new ${names.className}();
 
 
 function createServiceTestFile(names) {
-  return `import { ${names.className} } from "./${names.pascal}.service";
+  return `import { ${names.className} } from "./${names.name}.service";
 
 describe("${names.className}", () => {
   it("Service created", () => {
