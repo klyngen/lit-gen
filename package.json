@@ -3,6 +3,10 @@
   "type":"module",
   "version": "2.0.0",
   "description": "Make components with styles really fast. Almost like the angular cli. Just bad",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/klyngen/lit-gen"
+  },
   "main": "index.js",
   "author": "Martin Klingenberg",
   "license": "MIT",
