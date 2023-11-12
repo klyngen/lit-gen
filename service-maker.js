@@ -23,8 +23,6 @@ export function createService(name, test) {
 
   const names = createServiceNames(serviceName);
 
-  const serviceFile = createServiceFile(names);
-
   const serviceFilename = join(path, names.serviceFileName);
   writeFileSync(serviceFilename, createServiceFile(names));
   console.log(chalk.blue('CREATED  ') + chalk.gray(serviceFilename))

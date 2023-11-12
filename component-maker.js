@@ -11,17 +11,17 @@ export function createComponent(name, test) {
   const pathSegments = name.split('/');
 
   const componentName = pathSegments[pathSegments.length - 1];
+  const names = createComponentName(componentName);
 
-  const componentFile = createComponentFile(componentName);
+  const componentFile = createComponentFile(names);
 
   let path = "";
   if (pathSegments.length > 1) {
     path = join(...pathSegments.slice(0, pathSegments.length - 1))
   }
 
-  const names = createComponentName(componentName);
 
-  path = join(path, names.pascal);
+  path = join(path, names.file_name);
 
   mkdirSync(path, {
     recursive: true
@@ -48,6 +48,9 @@ export function createComponent(name, test) {
 
 }
 
+/**
+ * @param {string} name 
+ */
 function createComponentName(name) {
   if (!name.includes('-')) {
     throw Error("A webcomponent needs to contain a -");
@@ -59,29 +62,27 @@ function createComponentName(name) {
 
 
   const pascal = className[0].toLowerCase() + className.slice(1);
-
+  const file_name = name.toLowerCase();
 
   return {
     name,
     pascal,
+    file_name,
     className,
-    styleFilename: `${pascal}.styles.scss`,
-    componentFileName: `${pascal}.component.ts`,
-    testFileName: `${pascal}.spec.ts`
+    styleFilename: `${file_name}.styles.scss`,
+    componentFileName: `${file_name}.component.ts`,
+    testFileName: `${file_name}.spec.ts`
   }
 }
 
 
 function createComponentFile(names) {
-  return `
-import { css, html, LitElement, TemplateResult } from "lit";
+  return `import { html, LitElement, TemplateResult } from "lit";
 import { customElement } from "lit/decorators/custom-element.js";
 import style from "./${names.styleFilename}";
 
 @customElement("${names.name}")
 export class ${names.className} extends LitElement {
-
-
   static styles = [style];
 
   render(): TemplateResult {
@@ -91,8 +92,7 @@ export class ${names.className} extends LitElement {
 }
 
 function createTestFile(names) {
-  return `
-import "./${names.pascal}.component";
+  return `import "./${names.pascal}.component";
 
 describe("${names.name}", () => {
   it("${names.name}is registered", (done) => {
