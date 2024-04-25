@@ -1,7 +1,7 @@
 {
   "name": "lit-generator",
   "type":"module",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Make components with styles really fast. Almost like the angular cli. Just bad",
   "repository": {
     "type": "git",

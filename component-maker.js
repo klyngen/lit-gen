@@ -3,10 +3,22 @@ import { writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
 
 /**
+ * @typedef ComponentNames
+ * @property {string} name
+ * @property {string} className
+ * @property {string} styleFilename
+ * @property {string} testFileName
+ * @property {string} componentFileName
+ *
+ */
+
+
+/**
  * @param {string} name is a pathname / component-name
  * @param {boolean} test should a test be generated
+ * @param {boolean} index if true, we add an index-file to the project
  * */
-export function createComponent(name, test) {
+export function createComponent(name, test, index) {
 
   const pathSegments = name.split('/');
 
@@ -22,7 +34,7 @@ export function createComponent(name, test) {
   const componentFile = createComponentFile(names);
 
 
-  path = join(path, names.pascal);
+  path = join(path, names.name);
 
   mkdirSync(path, {
     recursive: true
@@ -47,8 +59,20 @@ export function createComponent(name, test) {
     console.log(chalk.green('CREATED  ') + chalk.gray(testFilePath))
   }
 
+  if (index) {
+    const indexFileContent = createIndexWithReExportsFile(names);
+    const indexFilePath = join(path, "index.ts");
+
+    writeFileSync(indexFilePath, indexFileContent);
+    console.log(chalk.green('CREATED  ') + chalk.gray(indexFilePath));
+  }
+
 }
 
+/**
+ * @param {string} name 
+ * @returns {ComponentNames}
+ */
 function createComponentName(name) {
   if (!name.includes('-')) {
     throw Error("A webcomponent needs to contain a -");
@@ -59,23 +83,30 @@ function createComponentName(name) {
     .join("");
 
 
-  const pascal = className[0].toLowerCase() + className.slice(1);
-
-
   return {
     name,
-    pascal,
     className,
-    styleFilename: `${pascal}.styles.scss`,
-    componentFileName: `${pascal}.component.ts`,
-    testFileName: `${pascal}.spec.ts`
+    styleFilename: `${name}.styles.scss`,
+    componentFileName: `${name}.component.ts`,
+    testFileName: `${name}.spec.ts`
   }
 }
 
+/**
+ * @param {ComponentNames} names
+ */
+function createIndexWithReExportsFile(names) {
+  return `
+export {${names.className}} from "./${names.componentFileName}";
+  `;
+}
 
+/**
+ * @param {ComponentNames} names
+ */
 function createComponentFile(names) {
   return `
-import { css, html, LitElement, TemplateResult } from "lit";
+import { html, LitElement, TemplateResult } from "lit";
 import { customElement } from "lit/decorators/custom-element.js";
 import style from "./${names.styleFilename}";
 
@@ -91,9 +122,12 @@ export class ${names.className} extends LitElement {
 }`
 }
 
+/**
+ * @param {ComponentNames} names
+ */
 function createTestFile(names) {
   return `
-import "./${names.pascal}.component";
+import "./${names.name}.component";
 
 describe("${names.name}", () => {
   it("${names.name}is registered", (done) => {

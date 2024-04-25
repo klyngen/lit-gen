@@ -1,5 +1,11 @@
 # Lit generator
 
+## TODO
+
+- Generere hele prosjekter
+- Komponenter burde ha en index.ts-fil
+- Muligheter for å generere moduler med, index.ts, components og services og kanskje en dependency-injection-løsning
+
 A simple node-js script to make lit-components and simple service files
 
 ## What does this cli do

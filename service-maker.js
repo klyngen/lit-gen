@@ -17,11 +17,14 @@ export function createService(name, test) {
     path = join(...pathSegments.slice(0, pathSegments.length - 1))
   }
 
+  const names = createServiceNames(serviceName);
+
+  path = join(path, names.pascal);
+
   mkdirSync(path, {
     recursive: true
   });
 
-  const names = createServiceNames(serviceName);
 
   const serviceFile = createServiceFile(names);
 
