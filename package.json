@@ -1,11 +1,11 @@
 {
-  "name": "lit-generator",
-  "type":"module",
-  "version": "3.0.0",
+  "name": "@klingen/lit-gen",
+  "type": "module",
+  "version": "3.2.1",
   "description": "Make components with styles really fast. Almost like the angular cli. Just bad",
   "repository": {
     "type": "git",
-    "url": "https://github.com/klyngen/lit-gen"
+    "url": "git+https://github.com/klyngen/lit-gen.git"
   },
   "main": "index.js",
   "author": "Martin Klingenberg",
@@ -18,6 +18,6 @@
     "commander": "^9.2.0"
   },
   "bin": {
-    "lit-gen": "./index.js"
+    "lit-gen": "index.js"
   }
 }

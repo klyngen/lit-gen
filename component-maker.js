@@ -97,7 +97,7 @@ function createComponentName(name) {
  */
 function createIndexWithReExportsFile(names) {
   return `
-export {${names.className}} from "./${names.componentFileName}";
+export { ${names.className} } from "./${names.componentFileName.replace(".ts", "")}";
   `;
 }
 

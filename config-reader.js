@@ -30,7 +30,7 @@ export const writeConfigurationFile = () => {
 
   const configurationFilePath = join(projectRoot, CONFIGURATION_FILE_NAME);
   writeFileSync(configurationFilePath, makeCofigurationTemplateContent());
-  console.log(chalk.green("CREATED") + chalk.grey(" lit-gen.json")); 
+  console.log(chalk.green("CREATED ") + chalk.grey(configurationFilePath)); 
 }
 
 /**
@@ -68,8 +68,8 @@ export const getProjectConfiguration = () => {
  * @returns {string | null}
  */
 const getProjectRoot = () => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-
+  const __dirname = process.cwd();
+  console.log(__dirname);
   let currentDir = __dirname
   let currentTraversal = 0;
   while(!existsSync(join(currentDir, "package.json"))) {
@@ -77,7 +77,7 @@ const getProjectRoot = () => {
     currentTraversal++;
 
     if (currentTraversal === MAX_UPWARDS_TRAVERSAL) {
-      console.log(chalk.yellow("Not able to find project root")); 
+      console.log(chalk.yellow("WARNING") + chalk.grey(" - Unable to locate project root. No package.json in any parent directories")); 
       return null;
     }
   }

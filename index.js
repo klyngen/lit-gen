@@ -1,12 +1,12 @@
 #! /usr/bin/env node
 
 import chalk from 'chalk';
-import { program, Command, Argument } from 'commander';
+import { program } from 'commander';
 import { createComponent } from './component-maker.js';
 import { createService } from './service-maker.js';
 import { getProjectConfiguration, writeConfigurationFile } from './config-reader.js';
 
-program.version("3.0.0")
+program.version("3.2.1")
   .description("Tool for making lit-elements and services. Making a lit-project easy to build")
 
 const configuration = getProjectConfiguration();
