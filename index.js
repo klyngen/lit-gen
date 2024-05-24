@@ -5,6 +5,7 @@ import { program } from 'commander';
 import { createComponent } from './component-maker.js';
 import { createService } from './service-maker.js';
 import { getProjectConfiguration, writeConfigurationFile } from './config-reader.js';
+import { createOrUpdateProjectPackages } from './project-initialiser.js';
 
 program.version("3.2.1")
   .description("Tool for making lit-elements and services. Making a lit-project easy to build")
@@ -26,6 +27,7 @@ program.command('init')
   .description("generates a configuration-file in the project root")
   .action(() => {
     writeConfigurationFile();
+    createOrUpdateProjectPackages();
   });
 
 program

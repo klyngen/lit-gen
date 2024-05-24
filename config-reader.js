@@ -1,7 +1,6 @@
 import { existsSync, writeFileSync, readFileSync } from 'fs';
-import { join, dirname } from 'path';
+import { join } from 'path';
 import chalk from 'chalk';
-import { fileURLToPath } from 'url';
 
 const CONFIGURATION_FILE_NAME = "lit-gen.json";
 const MAX_UPWARDS_TRAVERSAL = 15;
@@ -67,7 +66,7 @@ export const getProjectConfiguration = () => {
 /**
  * @returns {string | null}
  */
-const getProjectRoot = () => {
+export const getProjectRoot = () => {
   const __dirname = process.cwd();
   console.log(__dirname);
   let currentDir = __dirname
