@@ -1,7 +1,7 @@
 {
   "name": "@klingen/lit-gen",
   "type": "module",
-  "version": "3.2.1",
+  "version": "3.3.1",
   "description": "Make components with styles really fast. Almost like the angular cli. Just bad",
   "repository": {
     "type": "git",
