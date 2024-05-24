@@ -30,7 +30,6 @@ const SCRIPTS = [
 
 const DEV_DEPS = [
     ["@eslint/js", "^9.2.0"],
-    ["@open-wc/testing-helpers", "^3.0.1"],
     ["@types/jasmine", "^5.1.4"],
     ["dotenv-webpack", "^8.0.1"],
     ["eslint", "^9.2.0"],
