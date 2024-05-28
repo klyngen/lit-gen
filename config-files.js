@@ -1,4 +1,3 @@
-
 export const WEBPACK_DEV = `
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
@@ -83,7 +82,6 @@ export default [
   ...tseslint.configs.recommended,
 ];`;
 
-
 export const KARMA_CONFIG_FILE = `
 module.exports = (config) => {
   config.set({
@@ -119,7 +117,7 @@ module.exports = (config) => {
             exclude: [/node_modules/],
           },
           {
-            test: /\.css|\.s(c|a)ss$/,
+            test: /\.css$|\.s(c|a)ss$/,
             use: ["lit-scss-loader", "sass-loader"],
           },
         ],
