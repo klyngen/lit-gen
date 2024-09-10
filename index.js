@@ -5,6 +5,7 @@ import { program } from "commander";
 import { createComponent } from "./component-maker.js";
 import { createService } from "./service-maker.js";
 import {
+    createInitialFiles,
   getProjectConfiguration,
   writeConfigurationFile,
 } from "./config-reader.js";
@@ -43,6 +44,7 @@ program
   .action(() => {
     writeConfigurationFile();
     createOrUpdateProjectPackages();
+    createInitialFiles();
   });
 
 program

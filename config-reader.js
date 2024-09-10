@@ -1,4 +1,4 @@
-import { existsSync, writeFileSync, readFileSync } from 'fs';
+import { existsSync, writeFileSync, readFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import chalk from 'chalk';
 
@@ -19,6 +19,45 @@ const makeCofigurationTemplateContent = () => {
   "generateIndexFile": false
 }
   `;
+}
+
+export const createInitialFiles = () => {
+  const projectRoot = getProjectRoot();
+  if (!projectRoot) {
+    return;
+  }
+
+  const srcDir = join(projectRoot, 'src');
+  if (!existsSync(srcDir)) {
+    mkdirSync(srcDir);
+  }
+
+  const indexTsFile = join(projectRoot, 'src', 'index.ts');
+  const indexHtmlFile = join(projectRoot, 'src', 'index.html');
+
+  if (!existsSync(indexHtmlFile)) {
+    writeFileSync(indexHtmlFile, createIndexHtml());
+  }
+
+  if (!existsSync(indexHtmlFile)) {
+    writeFileSync(indexTsFile, createIndexTsFile());
+  }
+}
+
+const createIndexHtml = () => {
+  return `
+  <html>
+    <head>
+    <title>Change me</title>
+    </head>
+    <body>
+    </body>
+  </html>
+  `;
+}
+
+const createIndexTsFile = () => {
+  return ``;
 }
 
 export const writeConfigurationFile = () => {
